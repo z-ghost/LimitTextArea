@@ -1,0 +1,4 @@
+.notification {color:red !important;}
+div.textAreaLabel {position: relative; margin-top: -20px; height: 20px; text-align:right; font-style:italic; color:#d3d3d3; font-size:10pt;}
+div.textAreaLabel.hover {color:gray;}
+div.textAreaLabel.alert {color: red;}

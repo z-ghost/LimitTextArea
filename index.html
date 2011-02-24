@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>LimitTextArea example page</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>LimitTextArea example page</h1>
+<p>This simple page demonstrates functionality of LimitTextArea plugin for jQuery library. This plugin add maxlength functionality to textarea 
+with displaying the number of remaining characters. To add lenght limit to textarea:</p>
+<ol>
+	<li>set the maxlength attribute for textarea <pre>
+	&lt;textarea name="text" cols="50" rows="5" maxlength="100"&gt;Some text here&lt;/textarea&gt;</pre></li>
+	<li>then put javascript:<pre>
+	&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="jquery.limitTextArea.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript"&gt;
+	$(document).ready(function()
+	{
+		$("textarea").limitTextArea();
+	});
+	&lt;/script&gt;</pre>
+</li>
+</ol>
+<h1>Example</h1>	
+<table border="0" cellpadding="5" cellspacing="0">
+	<th style="vertical-align: top;">Textarea example</th>
+	<td><textarea name="text" cols="50" rows="5" maxlength="100">Some text here</textarea></td>
+</table>
+<h1>Customize</h1>
+<p>You can pass these options to limitTextArea function:</p>
+<dl>
+  <dt>labelContent</dt>
+   <dd>content of the label. Default: '{count} characters left', {count} will be replaced with number of remaining characters</dd>
+  <dt>labelClass</dt>
+   	<dd>determines css-class for the label with number of remaining characters. Default is <code>textAreaLabel</code> </dd>
+  <dt>alertClass</dt>
+    <dd>css class will be added to the label when no remaining characters. Default is <code>alert</code> </dd>
+  <dt>hoverClass</dt>
+    <dd>css class will be added to the label when textarea receive focus. Default is <code>hover</code> </dd>
+</dl>
+<p>example: <code>$("textarea").limitTextArea({labelContent : 'Remaining characters: {count}'});</code>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="jquery.limitTextArea.js"></script>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+		$("textarea").limitTextArea();
+	});
+</script>
+</body>
+</html>

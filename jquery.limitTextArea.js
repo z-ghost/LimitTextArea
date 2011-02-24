@@ -10,48 +10,49 @@
 
 			var $this = $(this);
 
-			var maxLength = $this.attr(opts.maxLengthAttr);
+			var maxLength = $this.attr("maxlength");
 			var id = $this.attr("id");
+			var wasLimitExceeded = false;
 
 			var label = $('<div/>', {
-				id : id + opts.labelIdPostfix,
 				"class" : opts.labelClass
 			}).insertBefore($this);
 
 			function updateLabel()
 			{
-				var charactersLeft = maxLength - $this.val().length;
+				var remainingChars = maxLength - $this.val().length;
+				
+				if(remainingChars < 0)
+					remainingChars = 0;
 
-				if(charactersLeft < 0)
-					charactersLeft = 0;
+				label.html(opts.labelContent.replace("{count}", remainingChars));
+			}
+			
+			function onChange()
+			{
+				if($this.val().length >= maxLength)
+				{
+					label.addClass(opts.alertClass);
+					// Cut down the string
+					$this.val($this.val().substr(0, maxLength));
+					wasLimitExceeded = true;
+				}
+				else if(wasLimitExceeded)
+				{
+					label.removeClass(opts.alertClass);
+				}
 
-				label.html(opts.labelContent.replace("{count}", charactersLeft));
+				updateLabel();
+				//return false;
 			}
 
 
 			updateLabel();
 
-			$this.keyup(function()
-			{
-				if($this.val().length >= maxLength)
-				{
-					// Add the alert class when we have too many chars
-					label.addClass(opts.alertClass);
-					// Cut down the string
-					$this.val($this.val().substr(0, maxLength));
-				}
-				else
-				{
-					// Remove the alert class
-					if(label.hasClass(opts.alertClass))
-						label.removeClass(opts.alertClass);
-				}
-
-				updateLabel();
-				return false;
-			})
-			.focusout(function() {label.removeClass(opts.hoverClass)})
-			.focusin(function() {label.addClass(opts.hoverClass)});
+			$this.keyup(onChange)
+				.keydown(onChange)
+				.focusout(function() {label.removeClass(opts.hoverClass)})
+				.focusin(function() {label.addClass(opts.hoverClass)});
 		});
 	};
 
@@ -59,9 +60,7 @@
 	  hoverClass: 'hover',
 	  alertClass: 'alert',
 	  labelClass: 'textAreaLabel',
-	  maxLengthAttr: 'maxlength',
-	  labelIdPostfix: 'Limiter',
-	  labelContent: 'Осталось {count} символов'
+	  labelContent: '{count} characters left',
 	};
 
 

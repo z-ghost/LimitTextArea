@@ -1,0 +1,33 @@
+== LimitTextArea ==
+
+LimitTextArea is a jQuery plugin. It limit the number of characters in textarea 
+and displays the number of remaining characters.
+
+=== How to use ===
+
+1. set the maxlength attribute for textarea 
+
+   <textarea name="text" cols="50" rows="5" maxlength="100">Some text here</textarea>
+
+2.then put javascript:
+
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
+   <script type="text/javascript" src="jquery.limitTextArea.js"></script>
+   <script type="text/javascript">
+      $(document).ready(function()
+      {
+         $("textarea").limitTextArea();
+      });
+   </script>
+
+=== Setting ===
+
+You can pass these options to limitTextArea function:
+
+* labelContent - content of the label. Default: '{count} characters left', {count} will be replaced with number of remaining characters
+* labelClass - determines css-class for the label with number of remaining characters. Default is textAreaLabel
+* alertClass - css class will be added to the label when no remaining characters. Default is alert
+* hoverClass - css class will be added to the label when textarea receive focus. Default is hover
+
+For example: 
+   $("textarea").limitTextArea({labelContent : 'Remaining characters: {count}'});

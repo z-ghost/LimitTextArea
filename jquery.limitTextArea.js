@@ -30,14 +30,16 @@
 			
 			function onChange()
 			{
-				if($this.val().length >= maxLength)
+				var currLen = $this.val().length;
+				if (currLen >= maxLength)
 				{
 					label.addClass(opts.alertClass);
 					// Cut down the string
-					$this.val($this.val().substr(0, maxLength));
+					if (currLen > maxLength)
+						$this.val($this.val().substr(0, maxLength));
 					wasLimitExceeded = true;
 				}
-				else if(wasLimitExceeded)
+				else if (wasLimitExceeded)
 				{
 					label.removeClass(opts.alertClass);
 				}
